@@ -5,20 +5,27 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.5.6</version>
+        <version>2.5.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.gcu</groupId>
-    <artifactId>Activities</artifactId>
+    <artifactId>CST-323_Activities</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Activities</name>
-    <description>Activities</description>
+    <packaging>war</packaging>
+    <name>CST-323_Activities</name>
+    <description>CST-323_Activities</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <repackage.classifier/>
         <spring-native.version>0.10.5</spring-native.version>
     </properties>
     <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.springframework.experimental/spring-native -->
+        <dependency>
+            <groupId>org.springframework.experimental</groupId>
+            <artifactId>spring-native</artifactId>
+            <version>${spring-native.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -30,11 +37,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.experimental</groupId>
-            <artifactId>spring-native</artifactId>
-            <version>${spring-native.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,26 +92,17 @@
             <version>3.0.0</version>
         </dependency>
     </dependencies>
-
     <build>
+        <finalName>cst323activities</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <classifier>${repackage.classifier}</classifier>
-                    <image>
-                        <builder>paketobuildpacks/builder:tiny</builder>
-                        <env>
-                            <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
-                        </env>
-                    </image>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.springframework.experimental</groupId>
                 <artifactId>spring-aot-maven-plugin</artifactId>
-                <version>${spring-native.version}</version>
+                <version>0.10.0</version>
                 <executions>
                     <execution>
                         <id>test-generate</id>
@@ -159,8 +152,8 @@
                 <dependency>
                     <groupId>org.graalvm.buildtools</groupId>
                     <artifactId>junit-platform-native</artifactId>
-                    <version>0.9.13</version>
-                    <scope>runtime</scope>
+                    <version>${native-buildtools.version}</version>
+                    <scope>test</scope>
                 </dependency>
             </dependencies>
             <build>
@@ -168,7 +161,7 @@
                     <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
-                        <version>0.9.13</version>
+                        <version>${native-buildtools.version}</version>
                         <executions>
                             <execution>
                                 <id>test-native</id>
@@ -190,5 +183,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>
