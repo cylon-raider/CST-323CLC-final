@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @SpringBootTest
-class ClcApplicationTests {
+class ClcApplication2Tests {
 
     @Test
     void contextLoads() {
